@@ -1,13 +1,14 @@
+#! /usr/bin/env python3
+
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
-# Global Variables
-driver = webdriver.Chrome()
+options = webdriver.ChromeOptions()
+options.add_argument("--headless=new")
+driver = webdriver.Chrome(options=options)
 companies = ['https://www.goodandgold.com/careers#job-listings', 
             'https://sproutbox.co/careers/', 
             'https://apply.workable.com/intuitive-digital/#jobs',
@@ -27,7 +28,7 @@ tabs = []
 def getText(driver, website):
   driver.get(website) # Webpage to scrape
   driver.execute_script("window.scrollTo(0, document.body.scrollHeight);") # Scroll to bottom to lazy load everything
-  time.sleep(3) # Wait to ensure lazy load
+  time.sleep(1) # Wait to ensure lazy load
   webpage_text = driver.find_element(By.CSS_SELECTOR, 'body').text.upper() # Assigning all text to variable, setting to uppercase
   return webpage_text
 
