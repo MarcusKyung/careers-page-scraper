@@ -1,4 +1,4 @@
-# _MarcusKyung.com_
+# _Selenium Careers Page Scraper_
 
 <div align="center">
     <!-- Project Shields -->
