@@ -6,6 +6,18 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
+class color:
+    PURPLE = '\033[95m'
+    CYAN = '\033[96m'
+    DARKCYAN = '\033[36m'
+    BLUE = '\033[94m'
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    RED = '\033[91m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+    END = '\033[0m'
+
 options = webdriver.ChromeOptions()
 options.add_argument("--headless=new")
 driver = webdriver.Chrome(options=options)
@@ -26,11 +38,11 @@ phrases = ['No available positions', "No positions", "Sorry", "No job", "No curr
 tabs = []
 
 def getText(driver, website):
-  driver.get(website) # Webpage to scrape
-  driver.execute_script("window.scrollTo(0, document.body.scrollHeight);") # Scroll to bottom to lazy load everything
-  time.sleep(1) # Wait to ensure lazy load
-  webpage_text = driver.find_element(By.CSS_SELECTOR, 'body').text.upper() # Assigning all text to variable, setting to uppercase
-  return webpage_text
+    driver.get(website) # Webpage to scrape
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);") # Scroll to bottom to lazy load everything
+    time.sleep(1) # Wait to ensure lazy load
+    webpage_text = driver.find_element(By.CSS_SELECTOR, 'body').text.upper() # Assigning all text to variable, setting to uppercase
+    return webpage_text
 
 
 def main(companies):
@@ -40,9 +52,9 @@ def main(companies):
             if text is None:
                 print("Error retrieving text for ", company)
             elif any(phrase.upper() in text for phrase in phrases):
-                print("No positions available for ", company)
+                print(color.RED, "No positions available for", company, color.END)
             else:
-                print("There are jobs available for ", company)
+                print(color.GREEN, "There are jobs available for", company, color.END)
                 tabs.append(company)
         except Exception as e:
             print("Error:", e)
@@ -53,8 +65,6 @@ def main(companies):
     for job_company in tabs:
         driver2.execute_script("window.open('" + job_company + "', '_blank')")
 
-    print('---------------------------------')
-    print('---------------------------------')
     print('---------------------------------')
     input("Press any key to close the browser...") 
     driver.quit()
