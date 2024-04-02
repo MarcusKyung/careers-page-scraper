@@ -34,7 +34,7 @@ companies = ['https://www.goodandgold.com/careers#job-listings',
             'https://murmurcreative.com/careers/',
             'https://elevatedthird.applytojob.com/apply/',
             ]
-phrases = ['No available positions', "No positions", "Sorry", "No job", "No current", "No open", 'None available', 'No openings']
+phrases = ['No available positions', "No positions", "Sorry", "No job", "No current", "No open", 'None available', 'Don\'t have', 'don\'t currently', 'No openings']
 tabs = []
 
 def getText(driver, website):
